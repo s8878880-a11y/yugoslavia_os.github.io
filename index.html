@@ -29,6 +29,8 @@
             --glass-border: rgba(255, 255, 255, 0.2);
             --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             --blur: blur(30px);
+            --text-scale: 1;
+            --icon-scale: 1;
         }
 
         body {
@@ -39,6 +41,51 @@
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             user-select: none;
+            font-size: calc(1rem * var(--text-scale));
+        }
+
+        /* Адаптивные стили для телефонов */
+        @media (max-width: 768px) {
+            :root {
+                --text-scale: 0.9;
+                --icon-scale: 0.9;
+            }
+            
+            .app-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 15px !important;
+                padding: 60px 15px 80px 15px !important;
+            }
+            
+            .app-icon-bg {
+                width: 55px !important;
+                height: 55px !important;
+            }
+            
+            .dock {
+                bottom: 10px !important;
+                padding: 8px 12px !important;
+            }
+            
+            .dock-app {
+                width: 45px !important;
+                height: 45px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --text-scale: 0.8;
+                --icon-scale: 0.8;
+            }
+            
+            .app-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .lock-time {
+                font-size: 3rem !important;
+            }
         }
 
         /* Экран блокировки */
@@ -48,17 +95,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--blue), var(--red));
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
             padding: 60px 20px 100px 20px;
             z-index: 1000;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
         }
 
         .lock-logo {
-            font-size: 3rem;
+            font-size: calc(3rem * var(--text-scale));
             font-weight: 800;
             color: var(--gold);
             margin-bottom: 1rem;
@@ -66,18 +115,20 @@
         }
 
         .lock-time {
-            font-size: 5rem;
+            font-size: calc(5rem * var(--text-scale));
             font-weight: 200;
             margin-top: 40px;
             color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .lock-date {
-            font-size: 1.5rem;
+            font-size: calc(1.5rem * var(--text-scale));
             font-weight: 400;
             margin-top: 10px;
             opacity: 0.9;
             color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
         .lock-bottom {
@@ -86,10 +137,11 @@
         }
 
         .unlock-hint {
-            font-size: 0.9rem;
+            font-size: calc(0.9rem * var(--text-scale));
             opacity: 0.8;
             margin-bottom: 20px;
             color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
         .unlock-bar {
@@ -111,6 +163,7 @@
             gap: 15px;
             justify-content: center;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .unlock-button {
@@ -122,7 +175,7 @@
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
+            font-size: calc(0.9rem * var(--text-scale));
         }
 
         .unlock-button:hover {
@@ -138,13 +191,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--blue), var(--red));
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 900;
             padding: 40px;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
         }
 
         .login-container {
@@ -154,7 +209,8 @@
             padding: 40px;
             text-align: center;
             max-width: 400px;
-            width: 100%;
+            width: 90%;
+            border: 1px solid var(--glass-border);
         }
 
         .login-avatar {
@@ -169,10 +225,12 @@
             font-size: 2rem;
             color: white;
             border: 3px solid var(--gold);
+            background-size: cover !important;
+            background-position: center !important;
         }
 
         .login-name {
-            font-size: 1.5rem;
+            font-size: calc(1.5rem * var(--text-scale));
             font-weight: 600;
             margin-bottom: 30px;
             color: white;
@@ -185,7 +243,7 @@
             border-radius: 15px;
             background: rgba(255, 255, 255, 0.1);
             color: white;
-            font-size: 1.1rem;
+            font-size: calc(1.1rem * var(--text-scale));
             text-align: center;
             margin-bottom: 20px;
         }
@@ -201,7 +259,7 @@
             border: none;
             padding: 15px 30px;
             border-radius: 15px;
-            font-size: 1.1rem;
+            font-size: calc(1.1rem * var(--text-scale));
             font-weight: 600;
             cursor: pointer;
             width: 100%;
@@ -217,6 +275,7 @@
             color: #ff6b6b;
             margin-top: 15px;
             display: none;
+            font-size: calc(0.9rem * var(--text-scale));
         }
 
         /* Рабочий стол */
@@ -235,8 +294,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: center;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
             z-index: 1;
         }
 
@@ -254,11 +314,13 @@
             display: flex;
             gap: 12px;
             z-index: 100;
+            max-width: 90%;
+            overflow-x: auto;
         }
 
         .dock-app {
-            width: 55px;
-            height: 55px;
+            width: calc(55px * var(--icon-scale));
+            height: calc(55px * var(--icon-scale));
             border-radius: 12px;
             background: var(--glass);
             display: flex;
@@ -267,6 +329,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
+            flex-shrink: 0;
         }
 
         .dock-app:hover {
@@ -279,7 +342,7 @@
         }
 
         .dock-app i {
-            font-size: 1.3rem;
+            font-size: calc(1.3rem * var(--icon-scale));
             color: var(--gold);
         }
 
@@ -315,7 +378,7 @@
 
         .time-display {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: calc(0.9rem * var(--text-scale));
             color: var(--gold);
         }
 
@@ -326,18 +389,47 @@
         }
 
         .status-icon {
-            font-size: 0.8rem;
+            font-size: calc(0.8rem * var(--text-scale));
             color: var(--gold);
+        }
+
+        .battery-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .battery-level {
+            width: 20px;
+            height: 10px;
+            border: 1px solid var(--gold);
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .battery-fill {
+            height: 100%;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .battery-tip {
+            width: 2px;
+            height: 4px;
+            background: var(--gold);
+            margin-left: 1px;
         }
 
         /* Сетка приложений */
         .app-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-            padding: 80px 25px 100px 25px;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 20px;
+            padding: 80px 20px 100px 20px;
             position: relative;
             z-index: 2;
+            justify-items: center;
         }
 
         .app-icon {
@@ -348,6 +440,7 @@
             transition: all 0.3s ease;
             padding: 10px;
             border-radius: 15px;
+            width: 80px;
         }
 
         .app-icon:hover {
@@ -356,8 +449,8 @@
         }
 
         .app-icon-bg {
-            width: 65px;
-            height: 65px;
+            width: calc(65px * var(--icon-scale));
+            height: calc(65px * var(--icon-scale));
             border-radius: 18px;
             background: linear-gradient(135deg, var(--blue), var(--red));
             display: flex;
@@ -368,15 +461,17 @@
         }
 
         .app-icon-bg i {
-            font-size: 1.6rem;
+            font-size: calc(1.6rem * var(--icon-scale));
             color: white;
         }
 
         .app-name {
-            font-size: 0.75rem;
+            font-size: calc(0.75rem * var(--text-scale));
             text-align: center;
             color: var(--light);
             font-weight: 500;
+            word-break: break-word;
+            max-width: 100%;
         }
 
         /* Окна приложений */
@@ -420,6 +515,7 @@
             gap: 10px;
             font-weight: 600;
             color: white;
+            font-size: calc(1rem * var(--text-scale));
         }
 
         .window-controls {
@@ -461,7 +557,7 @@
             padding: 20px;
             border-radius: 15px;
             text-align: right;
-            font-size: 2.5rem;
+            font-size: calc(2.5rem * var(--text-scale));
             margin-bottom: 10px;
             min-height: 80px;
             display: flex;
@@ -478,7 +574,7 @@
             color: white;
             border-radius: 15px;
             cursor: pointer;
-            font-size: 1.3rem;
+            font-size: calc(1.3rem * var(--text-scale));
             transition: all 0.2s ease;
             border: 1px solid var(--glass-border);
         }
@@ -502,6 +598,8 @@
             padding: 15px;
             background: var(--blue);
             border-bottom: 1px solid var(--glass-border);
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .browser-url {
@@ -511,13 +609,15 @@
             padding: 12px 15px;
             border-radius: 20px;
             color: #333;
-            font-size: 1rem;
+            font-size: calc(1rem * var(--text-scale));
+            min-width: 200px;
         }
 
         .browser-content {
             flex: 1;
             height: calc(100% - 70px);
             border: none;
+            width: 100%;
         }
 
         /* Настройки */
@@ -535,7 +635,7 @@
         }
 
         .settings-title {
-            font-size: 1.3rem;
+            font-size: calc(1.3rem * var(--text-scale));
             font-weight: 600;
             margin-bottom: 15px;
             color: var(--gold);
@@ -544,9 +644,22 @@
             gap: 10px;
         }
 
+        .settings-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .settings-label {
+            font-size: calc(1rem * var(--text-scale));
+        }
+
         .wallpaper-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             gap: 10px;
             margin-top: 15px;
         }
@@ -575,6 +688,7 @@
             display: flex;
             gap: 15px;
             margin-top: 15px;
+            flex-wrap: wrap;
         }
 
         .avatar-option {
@@ -618,6 +732,10 @@
 
         .toggle-switch.active .toggle-knob {
             left: 22px;
+        }
+
+        .size-slider {
+            width: 150px;
         }
 
         /* App Store */
@@ -670,6 +788,7 @@
             cursor: pointer;
             margin-top: 10px;
             transition: all 0.3s ease;
+            font-size: calc(0.9rem * var(--text-scale));
         }
 
         .install-btn:hover {
@@ -681,8 +800,83 @@
             color: var(--blue);
             padding: 5px 10px;
             border-radius: 10px;
-            font-size: 0.8rem;
+            font-size: calc(0.8rem * var(--text-scale));
             margin-top: 10px;
+        }
+
+        /* Музыкальный плеер */
+        .music-player {
+            padding: 20px;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .album-art {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--blue), var(--red));
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .music-controls {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .music-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--blue);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn.play {
+            background: var(--gold);
+            color: var(--blue);
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .progress-bar {
+            width: 100%;
+            max-width: 400px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            margin: 20px 0;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gold);
+            border-radius: 2px;
+            width: 30%;
         }
 
         /* Анимации */
@@ -713,10 +907,12 @@
             justify-content: center;
             align-items: center;
             z-index: 2000;
+            background-size: cover !important;
+            background-position: center !important;
         }
 
         .boot-logo {
-            font-size: 4rem;
+            font-size: calc(4rem * var(--text-scale));
             font-weight: 800;
             color: var(--gold);
             margin-bottom: 2rem;
@@ -729,6 +925,7 @@
             background: rgba(255, 255, 255, 0.2);
             border-radius: 3px;
             overflow: hidden;
+            max-width: 90%;
         }
 
         .boot-progress-bar {
@@ -742,7 +939,24 @@
         .boot-status {
             margin-top: 20px;
             color: white;
-            font-size: 1.1rem;
+            font-size: calc(1.1rem * var(--text-scale));
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        /* Выбор языка */
+        .language-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: calc(1rem * var(--text-scale));
+        }
+
+        .language-select option {
+            background: var(--dark);
+            color: white;
         }
     </style>
 </head>
@@ -763,12 +977,12 @@
         <div class="lock-date" id="lock-date">Понедељак, 1 јануар</div>
         
         <div class="lock-bottom">
-            <div class="unlock-hint">Кликните на траку или притисните размак за откључавање</div>
+            <div class="unlock-hint" id="unlock-hint">Кликните на траку или притисните размак за откључавање</div>
             <div class="unlock-bar" onclick="showLoginScreen()"></div>
             
             <div class="unlock-buttons">
                 <div class="unlock-button" onclick="showLoginScreen()">
-                    <i class="fas fa-fingerprint"></i> Откључај
+                    <i class="fas fa-fingerprint"></i> <span id="unlock-text">Откључај</span>
                 </div>
             </div>
         </div>
@@ -780,7 +994,7 @@
             <div class="login-avatar" id="login-avatar">U</div>
             <div class="login-name" id="login-name">Корисник</div>
             <input type="password" class="password-input" id="password-input" placeholder="Унесите лозинку" onkeypress="handlePasswordEnter(event)">
-            <button class="login-button" onclick="login()">Пријави се</button>
+            <button class="login-button" onclick="login()"><span id="login-text">Пријави се</span></button>
             <div class="login-error" id="login-error">Погрешна лозинка!</div>
         </div>
     </div>
@@ -793,9 +1007,13 @@
         <div class="status-bar">
             <div class="time-display" id="current-time">00:00</div>
             <div class="status-icons">
-                <i class="fas fa-signal status-icon"></i>
-                <i class="fas fa-wifi status-icon"></i>
-                <i class="fas fa-battery-full status-icon"></i>
+                <i class="fas fa-wifi status-icon" id="wifi-icon"></i>
+                <div class="battery-container">
+                    <div class="battery-level">
+                        <div class="battery-fill" id="battery-fill" style="width: 80%"></div>
+                    </div>
+                    <div class="battery-tip"></div>
+                </div>
             </div>
         </div>
 
@@ -815,7 +1033,7 @@
         <div class="window-header">
             <div class="window-title">
                 <i class="fas fa-globe"></i>
-                <span>Yugoslavia Browser</span>
+                <span id="browser-title">Yugoslavia Browser</span>
             </div>
             <div class="window-controls">
                 <div class="window-control minimize" onclick="minimizeApp('browser')"></div>
@@ -839,7 +1057,7 @@
         <div class="window-header">
             <div class="window-title">
                 <i class="fas fa-calculator"></i>
-                <span>Калкулатор</span>
+                <span id="calculator-title">Калкулатор</span>
             </div>
             <div class="window-controls">
                 <div class="window-control minimize" onclick="minimizeApp('calculator')"></div>
@@ -882,7 +1100,7 @@
         <div class="window-header">
             <div class="window-title">
                 <i class="fas fa-cog"></i>
-                <span>Подешавања</span>
+                <span id="settings-title">Подешавања</span>
             </div>
             <div class="window-controls">
                 <div class="window-control minimize" onclick="minimizeApp('settings')"></div>
@@ -893,9 +1111,26 @@
         <div class="window-content">
             <div class="settings-container">
                 <div class="settings-section">
-                    <div class="settings-title"><i class="fas fa-user"></i> Корисник</div>
-                    <div>Тренутни корисник: <strong id="current-user">Корисник</strong></div>
-                    <div style="margin-top: 15px;">Икона корисника:</div>
+                    <div class="settings-title"><i class="fas fa-language"></i> <span id="language-title">Језик</span></div>
+                    <div class="settings-row">
+                        <div class="settings-label" id="language-label">Изаберите језик:</div>
+                        <select class="language-select" id="language-select" onchange="changeLanguage(this.value)">
+                            <option value="sr">Српски</option>
+                            <option value="ru">Русский</option>
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="bs">Bosanski</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-title"><i class="fas fa-user"></i> <span id="user-title">Корисник</span></div>
+                    <div class="settings-row">
+                        <div class="settings-label" id="current-user-label">Тренутни корисник:</div>
+                        <strong id="current-user">Корисник</strong>
+                    </div>
+                    <div class="settings-label" id="avatar-label" style="margin-top: 15px;">Икона корисника:</div>
                     <div class="avatar-options">
                         <div class="avatar-option" style="background: linear-gradient(135deg, #003366, #C6363C);" onclick="changeAvatar('default')"></div>
                         <div class="avatar-option" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Flag_of_Serbia.svg/1200px-Flag_of_Serbia.svg.png');" onclick="changeAvatar('serbia')"></div>
@@ -904,30 +1139,42 @@
                 </div>
 
                 <div class="settings-section">
-                    <div class="settings-title"><i class="fas fa-image"></i> Позадина</div>
+                    <div class="settings-title"><i class="fas fa-image"></i> <span id="wallpaper-title">Позадина</span></div>
                     <div class="wallpaper-grid">
-                        <div class="wallpaper-option" style="background: linear-gradient(135deg, #003366, #C6363C);" onclick="changeWallpaper('default')"></div>
-                        <div class="wallpaper-option" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Flag_of_Serbia.svg/1200px-Flag_of_Serbia.svg.png');" onclick="changeWallpaper('serbia')"></div>
-                        <div class="wallpaper-option" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Flag_of_Bosnia_and_Herzegovina.svg/1200px-Flag_of_Bosnia_and_Herzegovina.svg.png');" onclick="changeWallpaper('bosnia')"></div>
-                        <div class="wallpaper-option" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');" onclick="changeWallpaper('nature')"></div>
-                        <div class="wallpaper-option" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');" onclick="changeWallpaper('mountains')"></div>
+                        <div class="wallpaper-option" style="background: linear-gradient(135deg, #003366, #C6363C);" onclick="changeWallpaper('gradient')"></div>
+                        <div class="wallpaper-option" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');" onclick="changeWallpaper('nature')"></div>
+                        <div class="wallpaper-option" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');" onclick="changeWallpaper('mountains')"></div>
+                        <div class="wallpaper-option" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');" onclick="changeWallpaper('space')"></div>
+                        <div class="wallpaper-option" style="background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');" onclick="changeWallpaper('night')"></div>
                         <div class="wallpaper-option" style="background: linear-gradient(135deg, #1a1a2e, #16213e);" onclick="changeWallpaper('dark')"></div>
                     </div>
                     <div style="margin-top: 15px;">
                         <input type="file" id="wallpaper-upload" accept="image/*" style="display: none;" onchange="uploadWallpaper(event)">
-                        <button class="install-btn" onclick="document.getElementById('wallpaper-upload').click()">Отпреми своју фотографију</button>
+                        <button class="install-btn" onclick="document.getElementById('wallpaper-upload').click()"><span id="upload-wallpaper-text">Отпреми своју фотографију</span></button>
                     </div>
                 </div>
 
                 <div class="settings-section">
-                    <div class="settings-title"><i class="fas fa-lock"></i> Безбедност</div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                        <div>Лозинка за систем</div>
-                        <button class="install-btn" onclick="changePassword()">Промени лозинку</button>
+                    <div class="settings-title"><i class="fas fa-text-height"></i> <span id="display-title">Приказ</span></div>
+                    <div class="settings-row">
+                        <div class="settings-label" id="text-size-label">Величина текста:</div>
+                        <input type="range" class="size-slider" id="text-size-slider" min="0.8" max="1.5" step="0.1" value="1" oninput="changeTextSize(this.value)">
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>Аутолок</div>
-                        <div class="toggle-switch" onclick="toggleAutoLock()">
+                    <div class="settings-row">
+                        <div class="settings-label" id="icon-size-label">Величина икона:</div>
+                        <input type="range" class="size-slider" id="icon-size-slider" min="0.8" max="1.5" step="0.1" value="1" oninput="changeIconSize(this.value)">
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-title"><i class="fas fa-lock"></i> <span id="security-title">Безбедност</span></div>
+                    <div class="settings-row">
+                        <div class="settings-label" id="password-label">Лозинка за систем</div>
+                        <button class="install-btn" onclick="changePassword()"><span id="change-password-text">Промени лозинку</span></button>
+                    </div>
+                    <div class="settings-row">
+                        <div class="settings-label" id="autolock-label">Аутолок</div>
+                        <div class="toggle-switch" id="autolock-switch" onclick="toggleAutoLock()">
                             <div class="toggle-knob"></div>
                         </div>
                     </div>
@@ -941,7 +1188,7 @@
         <div class="window-header">
             <div class="window-title">
                 <i class="fas fa-shopping-bag"></i>
-                <span>Yugoslavia Store</span>
+                <span id="appstore-title">Yugoslavia Store</span>
             </div>
             <div class="window-controls">
                 <div class="window-control minimize" onclick="minimizeApp('appstore')"></div>
@@ -956,6 +1203,46 @@
         </div>
     </div>
 
+    <!-- Окно музыки -->
+    <div class="app-window" id="music-window">
+        <div class="window-header">
+            <div class="window-title">
+                <i class="fas fa-music"></i>
+                <span id="music-title">Музика</span>
+            </div>
+            <div class="window-controls">
+                <div class="window-control minimize" onclick="minimizeApp('music')"></div>
+                <div class="window-control maximize" onclick="maximizeApp('music')"></div>
+                <div class="window-control close" onclick="closeApp('music')"></div>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="music-player">
+                <div class="album-art">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h2 id="now-playing">Сада се пушта</h2>
+                <h3 id="song-title">Yugoslavia OS Theme</h3>
+                <p id="song-artist">Системска музика</p>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                
+                <div class="music-controls">
+                    <button class="music-btn"><i class="fas fa-backward"></i></button>
+                    <button class="music-btn play"><i class="fas fa-play"></i></button>
+                    <button class="music-btn"><i class="fas fa-forward"></i></button>
+                </div>
+                
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" min="0" max="100" value="80" style="width: 150px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Системные переменные
         let currentApp = null;
@@ -963,21 +1250,207 @@
         let userSettings = {
             password: '1234',
             avatar: 'default',
-            wallpaper: 'default',
+            wallpaper: 'gradient',
             autoLock: true,
-            language: 'sr'
+            language: 'sr',
+            textSize: 1,
+            iconSize: 1
+        };
+
+        // Переводы
+        const translations = {
+            sr: {
+                unlock: "Откључај",
+                login: "Пријави се",
+                passwordPlaceholder: "Унесите лозинку",
+                passwordError: "Погрешна лозинка!",
+                unlockHint: "Кликните на траку или притисните размак за откључавање",
+                
+                browser: "Прегледач",
+                calculator: "Калкулатор",
+                settings: "Подешавања",
+                appstore: "Продавница",
+                music: "Музика",
+                photos: "Фотографије",
+                camera: "Камера",
+                terminal: "Терминал",
+                
+                language: "Језик",
+                user: "Корисник",
+                wallpaper: "Позадина",
+                display: "Приказ",
+                security: "Безбедност",
+                
+                selectLanguage: "Изаберите језик:",
+                currentUser: "Тренутни корисник:",
+                userIcon: "Икона корисника:",
+                uploadWallpaper: "Отпреми своју фотографију",
+                textSize: "Величина текста:",
+                iconSize: "Величина икона:",
+                systemPassword: "Лозинка за систем",
+                changePassword: "Промени лозинку",
+                autolock: "Аутолок",
+                
+                nowPlaying: "Сада се пушта",
+                songTitle: "Yugoslavia OS Theme",
+                artist: "Системска музика"
+            },
+            ru: {
+                unlock: "Разблокировать",
+                login: "Войти",
+                passwordPlaceholder: "Введите пароль",
+                passwordError: "Неверный пароль!",
+                unlockHint: "Нажмите на полоску или пробел для разблокировки",
+                
+                browser: "Браузер",
+                calculator: "Калькулятор",
+                settings: "Настройки",
+                appstore: "Магазин",
+                music: "Музыка",
+                photos: "Фото",
+                camera: "Камера",
+                terminal: "Терминал",
+                
+                language: "Язык",
+                user: "Пользователь",
+                wallpaper: "Обои",
+                display: "Дисплей",
+                security: "Безопасность",
+                
+                selectLanguage: "Выберите язык:",
+                currentUser: "Текущий пользователь:",
+                userIcon: "Аватар пользователя:",
+                uploadWallpaper: "Загрузить свою фотографию",
+                textSize: "Размер текста:",
+                iconSize: "Размер иконок:",
+                systemPassword: "Пароль системы",
+                changePassword: "Сменить пароль",
+                autolock: "Автоблокировка",
+                
+                nowPlaying: "Сейчас играет",
+                songTitle: "Yugoslavia OS Theme",
+                artist: "Системная музыка"
+            },
+            en: {
+                unlock: "Unlock",
+                login: "Login",
+                passwordPlaceholder: "Enter password",
+                passwordError: "Wrong password!",
+                unlockHint: "Click the bar or press space to unlock",
+                
+                browser: "Browser",
+                calculator: "Calculator",
+                settings: "Settings",
+                appstore: "App Store",
+                music: "Music",
+                photos: "Photos",
+                camera: "Camera",
+                terminal: "Terminal",
+                
+                language: "Language",
+                user: "User",
+                wallpaper: "Wallpaper",
+                display: "Display",
+                security: "Security",
+                
+                selectLanguage: "Select language:",
+                currentUser: "Current user:",
+                userIcon: "User icon:",
+                uploadWallpaper: "Upload your photo",
+                textSize: "Text size:",
+                iconSize: "Icon size:",
+                systemPassword: "System password",
+                changePassword: "Change password",
+                autolock: "Auto lock",
+                
+                nowPlaying: "Now Playing",
+                songTitle: "Yugoslavia OS Theme",
+                artist: "System Music"
+            },
+            fr: {
+                unlock: "Déverrouiller",
+                login: "Connexion",
+                passwordPlaceholder: "Entrez le mot de passe",
+                passwordError: "Mot de passe incorrect!",
+                unlockHint: "Cliquez sur la barre ou appuyez sur espace pour déverrouiller",
+                
+                browser: "Navigateur",
+                calculator: "Calculatrice",
+                settings: "Paramètres",
+                appstore: "Magasin",
+                music: "Musique",
+                photos: "Photos",
+                camera: "Caméra",
+                terminal: "Terminal",
+                
+                language: "Langue",
+                user: "Utilisateur",
+                wallpaper: "Fond d'écran",
+                display: "Affichage",
+                security: "Sécurité",
+                
+                selectLanguage: "Sélectionnez la langue:",
+                currentUser: "Utilisateur actuel:",
+                userIcon: "Icône utilisateur:",
+                uploadWallpaper: "Télécharger votre photo",
+                textSize: "Taille du texte:",
+                iconSize: "Taille des icônes:",
+                systemPassword: "Mot de passe système",
+                changePassword: "Changer le mot de passe",
+                autolock: "Verrouillage auto",
+                
+                nowPlaying: "En cours de lecture",
+                songTitle: "Yugoslavia OS Theme",
+                artist: "Musique système"
+            },
+            bs: {
+                unlock: "Otključaj",
+                login: "Prijavi se",
+                passwordPlaceholder: "Unesite lozinku",
+                passwordError: "Pogrešna lozinka!",
+                unlockHint: "Kliknite na traku ili pritisnite razmak za otključavanje",
+                
+                browser: "Pregledač",
+                calculator: "Kalkulator",
+                settings: "Postavke",
+                appstore: "Prodavnica",
+                music: "Muzika",
+                photos: "Fotografije",
+                camera: "Kamera",
+                terminal: "Terminal",
+                
+                language: "Jezik",
+                user: "Korisnik",
+                wallpaper: "Pozadina",
+                display: "Prikaz",
+                security: "Sigurnost",
+                
+                selectLanguage: "Odaberite jezik:",
+                currentUser: "Trenutni korisnik:",
+                userIcon: "Ikona korisnika:",
+                uploadWallpaper: "Otpremi svoju fotografiju",
+                textSize: "Veličina teksta:",
+                iconSize: "Veličina ikona:",
+                systemPassword: "Lozinka sistema",
+                changePassword: "Promijeni lozinku",
+                autolock: "Auto zaključavanje",
+                
+                nowPlaying: "Sada se reprodukuje",
+                songTitle: "Yugoslavia OS Theme",
+                artist: "Sistemska muzika"
+            }
         };
 
         // Приложения системы
         const systemApps = [
-            { id: 'browser', name: 'Прегледач', icon: 'globe', dock: true },
-            { id: 'calculator', name: 'Калкулатор', icon: 'calculator', dock: true },
-            { id: 'settings', name: 'Подешавања', icon: 'cog', dock: true },
-            { id: 'appstore', name: 'Продавница', icon: 'shopping-bag', dock: true },
-            { id: 'terminal', name: 'Терминал', icon: 'terminal', dock: false },
-            { id: 'music', name: 'Музика', icon: 'music', dock: false },
-            { id: 'photos', name: 'Фотографије', icon: 'images', dock: false },
-            { id: 'camera', name: 'Камера', icon: 'camera', dock: false }
+            { id: 'browser', name: 'browser', icon: 'globe', dock: true },
+            { id: 'calculator', name: 'calculator', icon: 'calculator', dock: true },
+            { id: 'settings', name: 'settings', icon: 'cog', dock: true },
+            { id: 'appstore', name: 'appstore', icon: 'shopping-bag', dock: true },
+            { id: 'music', name: 'music', icon: 'music', dock: false },
+            { id: 'photos', name: 'photos', icon: 'images', dock: false },
+            { id: 'camera', name: 'camera', icon: 'camera', dock: false },
+            { id: 'terminal', name: 'terminal', icon: 'terminal', dock: false }
         ];
 
         // Приложения магазина
@@ -1002,22 +1475,61 @@
             updateTime();
             setInterval(updateTime, 1000);
             setupKeyboard();
-            renderApps();
+            updateBattery();
+            setInterval(updateBattery, 30000); // Обновлять батарею каждые 30 секунд
+            updateWifi();
+            setInterval(updateWifi, 15000); // Обновлять Wi-Fi каждые 15 секунд
         });
 
         // Загрузка системы
         function simulateBoot() {
-            const bootStages = [
-                "Покрећем систем...",
-                "Учитавам језгро...",
-                "Покрећем сервисе...",
-                "Припремам кориснички интерфејс...",
-                "Учитавам подешавања...",
-                "Спремно!"
-            ];
+            const bootStages = {
+                sr: [
+                    "Покрећем систем...",
+                    "Учитавам језгро...",
+                    "Покрећем сервисе...",
+                    "Припремам кориснички интерфејс...",
+                    "Учитавам подешавања...",
+                    "Спремно!"
+                ],
+                ru: [
+                    "Запускаем систему...",
+                    "Загружаем ядро...",
+                    "Запускаем сервисы...",
+                    "Подготавливаем интерфейс...",
+                    "Загружаем настройки...",
+                    "Готово!"
+                ],
+                en: [
+                    "Starting system...",
+                    "Loading kernel...",
+                    "Starting services...",
+                    "Preparing user interface...",
+                    "Loading settings...",
+                    "Ready!"
+                ],
+                fr: [
+                    "Démarrage du système...",
+                    "Chargement du noyau...",
+                    "Démarrage des services...",
+                    "Préparation de l'interface...",
+                    "Chargement des paramètres...",
+                    "Prêt!"
+                ],
+                bs: [
+                    "Pokrećem sistem...",
+                    "Učitavam kernel...",
+                    "Pokrećem servise...",
+                    "Pripremam korisnički interfejs...",
+                    "Učitavam postavke...",
+                    "Spremno!"
+                ]
+            };
 
             let progress = 0;
             let stage = 0;
+            const lang = userSettings.language || 'sr';
+            const stages = bootStages[lang] || bootStages.sr;
 
             const interval = setInterval(() => {
                 progress += Math.random() * 15;
@@ -1036,8 +1548,8 @@
                 document.getElementById('boot-progress').style.width = progress + '%';
                 
                 if (progress >= stage * 20) {
-                    document.getElementById('boot-status').textContent = bootStages[stage];
-                    stage = Math.min(stage + 1, bootStages.length - 1);
+                    document.getElementById('boot-status').textContent = stages[stage];
+                    stage = Math.min(stage + 1, stages.length - 1);
                 }
             }, 200);
         }
@@ -1062,21 +1574,43 @@
             // Применяем аватар
             changeAvatar(userSettings.avatar, false);
             
+            // Применяем размер текста и иконок
+            changeTextSize(userSettings.textSize, false);
+            changeIconSize(userSettings.iconSize, false);
+            
+            // Применяем язык
+            changeLanguage(userSettings.language, false);
+            
+            // Применяем автоблокировку
+            if (userSettings.autoLock) {
+                document.getElementById('autolock-switch').classList.add('active');
+            }
+            
             // Загружаем установленные приложения
             const savedApps = localStorage.getItem('yugoslaviaOS_apps');
             if (savedApps) {
                 installedApps = JSON.parse(savedApps);
             }
+            
+            renderApps();
         }
 
         // Обновление времени
         function updateTime() {
             const now = new Date();
-            const timeString = now.toLocaleTimeString('sr-RS', { 
+            const lang = userSettings.language || 'sr';
+            const timeString = now.toLocaleTimeString(lang === 'sr' ? 'sr-RS' : 
+                                                     lang === 'ru' ? 'ru-RU' :
+                                                     lang === 'fr' ? 'fr-FR' :
+                                                     lang === 'bs' ? 'bs-BA' : 'en-US', { 
                 hour: '2-digit', 
                 minute: '2-digit' 
             });
-            const dateString = now.toLocaleDateString('sr-RS', {
+            
+            const dateString = now.toLocaleDateString(lang === 'sr' ? 'sr-RS' : 
+                                                     lang === 'ru' ? 'ru-RU' :
+                                                     lang === 'fr' ? 'fr-FR' :
+                                                     lang === 'bs' ? 'bs-BA' : 'en-US', {
                 weekday: 'long',
                 day: 'numeric',
                 month: 'long'
@@ -1085,6 +1619,33 @@
             document.getElementById('lock-time').textContent = timeString;
             document.getElementById('lock-date').textContent = dateString;
             document.getElementById('current-time').textContent = timeString;
+        }
+
+        // Обновление батареи
+        function updateBattery() {
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(function(battery) {
+                    const level = Math.floor(battery.level * 100);
+                    document.getElementById('battery-fill').style.width = level + '%';
+                });
+            } else {
+                // Fallback для браузеров без Battery API
+                const levels = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10];
+                const randomLevel = levels[Math.floor(Math.random() * levels.length)];
+                document.getElementById('battery-fill').style.width = randomLevel + '%';
+            }
+        }
+
+        // Обновление Wi-Fi
+        function updateWifi() {
+            const wifiIcon = document.getElementById('wifi-icon');
+            const strengths = ['fa-wifi', 'fa-wifi', 'fa-wifi', 'fa-signal'];
+            const randomStrength = strengths[Math.floor(Math.random() * strengths.length)];
+            
+            // Убираем все классы сигнала
+            wifiIcon.classList.remove('fa-wifi', 'fa-signal');
+            // Добавляем случайный класс
+            wifiIcon.classList.add(randomStrength);
         }
 
         // Настройка клавиатуры
@@ -1132,10 +1693,85 @@
             }
         }
 
+        // Смена языка
+        function changeLanguage(lang, save = true) {
+            userSettings.language = lang;
+            if (save) {
+                saveUserSettings();
+            }
+            
+            const t = translations[lang] || translations.sr;
+            
+            // Обновляем тексты
+            document.getElementById('unlock-text').textContent = t.unlock;
+            document.getElementById('login-text').textContent = t.login;
+            document.getElementById('password-input').placeholder = t.passwordPlaceholder;
+            document.getElementById('login-error').textContent = t.passwordError;
+            document.getElementById('unlock-hint').textContent = t.unlockHint;
+            
+            // Обновляем заголовки приложений
+            document.getElementById('browser-title').textContent = t.browser;
+            document.getElementById('calculator-title').textContent = t.calculator;
+            document.getElementById('settings-title').textContent = t.settings;
+            document.getElementById('appstore-title').textContent = t.appstore;
+            document.getElementById('music-title').textContent = t.music;
+            
+            // Обновляем настройки
+            document.getElementById('language-title').textContent = t.language;
+            document.getElementById('user-title').textContent = t.user;
+            document.getElementById('wallpaper-title').textContent = t.wallpaper;
+            document.getElementById('display-title').textContent = t.display;
+            document.getElementById('security-title').textContent = t.security;
+            
+            document.getElementById('language-label').textContent = t.selectLanguage;
+            document.getElementById('current-user-label').textContent = t.currentUser;
+            document.getElementById('avatar-label').textContent = t.userIcon;
+            document.getElementById('upload-wallpaper-text').textContent = t.uploadWallpaper;
+            document.getElementById('text-size-label').textContent = t.textSize;
+            document.getElementById('icon-size-label').textContent = t.iconSize;
+            document.getElementById('password-label').textContent = t.systemPassword;
+            document.getElementById('change-password-text').textContent = t.changePassword;
+            document.getElementById('autolock-label').textContent = t.autolock;
+            
+            // Обновляем музыку
+            document.getElementById('now-playing').textContent = t.nowPlaying;
+            document.getElementById('song-title').textContent = t.songTitle;
+            document.getElementById('song-artist').textContent = t.artist;
+            
+            // Обновляем язык в select
+            document.getElementById('language-select').value = lang;
+            
+            // Перерисовываем приложения с новыми названиями
+            renderApps();
+            updateTime();
+        }
+
+        // Изменение размера текста
+        function changeTextSize(size, save = true) {
+            userSettings.textSize = parseFloat(size);
+            if (save) {
+                saveUserSettings();
+            }
+            document.documentElement.style.setProperty('--text-scale', size);
+            document.getElementById('text-size-slider').value = size;
+        }
+
+        // Изменение размера иконок
+        function changeIconSize(size, save = true) {
+            userSettings.iconSize = parseFloat(size);
+            if (save) {
+                saveUserSettings();
+            }
+            document.documentElement.style.setProperty('--icon-scale', size);
+            document.getElementById('icon-size-slider').value = size;
+        }
+
         // Рендер приложений
         function renderApps() {
             const appGrid = document.getElementById('app-grid');
             const dock = document.getElementById('dock');
+            const lang = userSettings.language || 'sr';
+            const t = translations[lang] || translations.sr;
             
             // Очищаем сетку
             appGrid.innerHTML = '';
@@ -1143,6 +1779,8 @@
             
             // Рендерим системные приложения
             systemApps.forEach(app => {
+                const appName = t[app.name] || app.name;
+                
                 // Иконка на рабочем столе
                 const appIcon = document.createElement('div');
                 appIcon.className = 'app-icon';
@@ -1151,7 +1789,7 @@
                     <div class="app-icon-bg">
                         <i class="fas fa-${app.icon}"></i>
                     </div>
-                    <div class="app-name">${app.name}</div>
+                    <div class="app-name">${appName}</div>
                 `;
                 appGrid.appendChild(appIcon);
                 
@@ -1216,7 +1854,17 @@
                 installedApps.push(appId);
                 localStorage.setItem('yugoslaviaOS_apps', JSON.stringify(installedApps));
                 renderApps();
-                alert(`Апликација "${storeApps.find(app => app.id === appId).name}" је успешно инсталирана!`);
+                
+                const lang = userSettings.language || 'sr';
+                const messages = {
+                    sr: "успешно инсталирана",
+                    ru: "успешно установлено", 
+                    en: "successfully installed",
+                    fr: "installé avec succès",
+                    bs: "uspješno instalirana"
+                };
+                
+                alert(`Апликација "${storeApps.find(app => app.id === appId).name}" ${messages[lang]}!`);
             }
         }
 
@@ -1232,7 +1880,12 @@
                 document.querySelectorAll('.dock-app').forEach(dockApp => {
                     dockApp.classList.remove('active');
                 });
-                document.querySelector(`.dock-app:nth-child(${systemApps.findIndex(app => app.id === appId) + 1})`)?.classList.add('active');
+                
+                // Находим соответствующую иконку в доке
+                const dockIndex = systemApps.findIndex(app => app.id === appId);
+                if (dockIndex !== -1 && systemApps[dockIndex].dock) {
+                    document.querySelectorAll('.dock-app')[dockIndex]?.classList.add('active');
+                }
             }
         }
 
@@ -1257,7 +1910,6 @@
         }
 
         function minimizeApp(appId) {
-            // В этой версии минимизация просто закрывает окно
             closeApp(appId);
         }
 
@@ -1268,7 +1920,7 @@
             }
         }
 
-        // Калькулятор
+        // Калькулятор (функции остаются теми же)
         function appendNumber(num) {
             if (calcWaiting) {
                 calcValue = num;
@@ -1369,27 +2021,38 @@
 
         // Настройки
         function changeWallpaper(wallpaper, save = true) {
-            const wallpaperElement = document.getElementById('wallpaper');
+            const lockScreen = document.getElementById('lock-screen');
+            const loginScreen = document.getElementById('login-screen');
+            const desktop = document.getElementById('desktop');
+            const bootScreen = document.getElementById('boot-screen');
+            
+            let background = '';
             
             switch(wallpaper) {
-                case 'serbia':
-                    wallpaperElement.style.backgroundImage = 'url("https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Flag_of_Serbia.svg/1200px-Flag_of_Serbia.svg.png")';
-                    break;
-                case 'bosnia':
-                    wallpaperElement.style.backgroundImage = 'url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Flag_of_Bosnia_and_Herzegovina.svg/1200px-Flag_of_Bosnia_and_Herzegovina.svg.png")';
-                    break;
                 case 'nature':
-                    wallpaperElement.style.backgroundImage = 'url("https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80")';
+                    background = 'url("https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80")';
                     break;
                 case 'mountains':
-                    wallpaperElement.style.backgroundImage = 'url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80")';
+                    background = 'url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80")';
+                    break;
+                case 'space':
+                    background = 'url("https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80")';
+                    break;
+                case 'night':
+                    background = 'url("https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80")';
                     break;
                 case 'dark':
-                    wallpaperElement.style.background = 'linear-gradient(135deg, #1a1a2e, #16213e)';
+                    background = 'linear-gradient(135deg, #1a1a2e, #16213e)';
                     break;
                 default:
-                    wallpaperElement.style.background = 'linear-gradient(135deg, var(--blue), var(--red))';
+                    background = 'linear-gradient(135deg, #003366, #C6363C)';
             }
+            
+            // Применяем ко всем экранам
+            lockScreen.style.background = background;
+            loginScreen.style.background = background;
+            desktop.style.background = background;
+            bootScreen.style.background = background;
             
             if (save) {
                 userSettings.wallpaper = wallpaper;
@@ -1426,7 +2089,11 @@
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.getElementById('wallpaper').style.backgroundImage = `url(${e.target.result})`;
+                    const background = `url(${e.target.result})`;
+                    document.getElementById('lock-screen').style.background = background;
+                    document.getElementById('login-screen').style.background = background;
+                    document.getElementById('desktop').style.background = background;
+                    document.getElementById('boot-screen').style.background = background;
                     userSettings.wallpaper = 'custom';
                     saveUserSettings();
                 };
